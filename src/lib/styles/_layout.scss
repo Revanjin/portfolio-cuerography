@@ -1,0 +1,69 @@
+$tablet: 720px;
+$desktop: 1024px;
+
+@mixin from($width) {
+	@media (min-width: $width) {
+		@content;
+	}
+}
+
+@mixin column {
+	margin-inline: var(--page-margin);
+
+	@include from($desktop) {
+		width: var(--column-width);
+		margin-inline: auto;
+	}
+}
+
+@mixin plain-button {
+	display: flex;
+	align-items: center;
+	min-height: var(--tap);
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--color-ink);
+	font: inherit;
+	cursor: pointer;
+}
+
+@mixin truncate {
+	min-width: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+// Knöpfe, die wie Textlinks aussehen (Info, Schließen)
+@mixin link-button {
+	@include plain-button;
+	text-decoration: underline;
+	text-decoration-color: var(--color-underline);
+	text-underline-offset: 3px;
+	transition: text-decoration-color var(--duration-micro) var(--ease);
+
+	&:hover {
+		text-decoration-color: var(--color-ink);
+	}
+
+	&:active {
+		color: var(--color-grey);
+	}
+}
+
+@mixin icon-button {
+	@include plain-button;
+	justify-content: center;
+	width: var(--tap);
+	height: var(--tap);
+	transition: color var(--duration-micro) var(--ease);
+
+	&:hover {
+		color: var(--color-grey);
+	}
+
+	&:active {
+		transform: scale(0.94);
+	}
+}

@@ -1,0 +1,120 @@
+@use 'layout' as *;
+
+:root {
+	--color-wall: #fafaf8;
+	--color-ink: #161616;
+	--color-grey: #686761;
+	--color-grey-on-surface: #5c5b56;
+	--color-surface: #efeee9;
+	--color-line: #d8d6d0;
+	--color-underline: #c4c2bb;
+
+	--font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	--font-base: 14px;
+	--font-sub: 13px;
+	--font-caption: 12px;
+	--font-hint: 12px;
+	--font-handle: 34px;
+	--font-lead: 19px;
+	--line-height: 1.45;
+	--line-height-lead: 1.4;
+	--line-height-handle: 1.1;
+	--tracking-handle: -0.02em;
+
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 20px;
+	--space-6: 24px;
+	--space-7: 32px;
+	--space-8: 40px;
+	--space-9: 48px;
+	--space-10: 72px;
+
+	--tap: 44px;
+	--page-margin: 24px;
+	--column-width: 64%;
+	--page-bottom: 24px;
+
+	--header-top: 12px;
+	--header-to-video: 24px;
+	--video-to-photos: 64px;
+	--photos-to-instagram: 72px;
+	--instagram-padding: 28px;
+	--instagram-arrow: 32px;
+	--footer-top: 40px;
+
+	--gallery-gap-x: 12px;
+	--gallery-gap-y: 20px;
+	--slider-height: 300px;
+	--slider-gap: 12px;
+
+	--whitebox-bar: 56px;
+	--whitebox-nav: 56px;
+	--whitebox-gutter: 0px;
+	--whitebox-arrow-icon: 26px;
+	--whitebox-arrow: 56px;
+	--whitebox-tick: 10px;
+	--whitebox-caption: 128px;
+	--status-height: 36px;
+	--info-measure: 40ch;
+	--form-measure: 520px;
+	--font-input: 16px;
+	--text-measure: 68ch;
+	--caption-gap: 6px;
+
+	--duration-micro: 180ms;
+	--duration-move: 300ms;
+	--ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+	@include from($tablet) {
+		--font-base: 15px;
+		--font-sub: 15px;
+		--font-caption: 13px;
+		--font-handle: 48px;
+		--font-lead: 24px;
+
+		--page-margin: 48px;
+		--page-bottom: 40px;
+		--header-top: 24px;
+		--header-to-video: 40px;
+		--video-to-photos: 96px;
+		--photos-to-instagram: 120px;
+		--instagram-padding: 36px;
+		--instagram-arrow: 44px;
+		--footer-top: 56px;
+
+		--gallery-gap-x: 24px;
+		--gallery-gap-y: 28px;
+		--slider-height: 360px;
+		--slider-gap: 20px;
+
+		--caption-gap: 8px;
+		--whitebox-bar: 76px;
+		--whitebox-nav: 64px;
+		// Platz für die Randpfeile: 24 px Rand, 56 px Knopf, 40 px Luft
+		--whitebox-gutter: 120px;
+		--whitebox-tick: 16px;
+		--whitebox-caption: 64px;
+	}
+
+	@include from($desktop) {
+		--font-base: 14px;
+		--font-sub: 14px;
+		--font-handle: 64px;
+
+		--page-bottom: 48px;
+		--header-to-video: 48px;
+		--video-to-photos: 120px;
+		--photos-to-instagram: 160px;
+		--instagram-padding: 40px;
+		--instagram-arrow: 56px;
+		--footer-top: 64px;
+
+		--gallery-gap-x: 32px;
+		--gallery-gap-y: 32px;
+		--slider-height: 420px;
+		--slider-gap: 24px;
+	}
+}
