@@ -89,6 +89,8 @@ Die Idee: Das Video hängt wie eine Arbeit an der Wand, die Beschriftung darunte
 - Instagram bleibt dreimal erreichbar: Header, großer Block, Info-Overlay. Der Knopf im Header
   steht auf jeder Breite ganz oben.
 - Keine Emojis, weder in der Oberfläche noch im Code oder in Commit-Messages.
+- Seitenwechsel: kurzes Ausblenden, die neue Seite steigt von unten ein. Kein seitliches Schieben,
+  das gehört in der Galerie dem Blättern.
 - Texte auf der Seite sind englisch, auch `aria-label` und Platzhalter. Kommentare im Code sind deutsch.
 
 ## Performance
@@ -119,6 +121,15 @@ Komfort beim Entwickeln.
 - Videos werden nicht gespeichert, außer `video.offline` ist an. Dann müssen Range-Requests mit
   206 und `Content-Range` beantwortet werden, sonst spielt Safari nicht.
 - Alles unter `/video/` ist vom Vorab-Cache ausgenommen. Poster liegen deshalb in `static/poster/`.
+
+## Datenschutz
+
+- Keine Anfragen an Dritte beim Laden der Seite: keine Google Fonts, keine eingebetteten
+  Instagram-Posts, keine Analyse- oder Tracking-Skripte, keine Captchas von Drittanbietern.
+  Einzige Ausnahme sind derzeit die Platzhalterfotos von Unsplash, und die müssen vor dem Livegang weg.
+- Keine Cookies. Im Gerätespeicher liegen nur der Offline-Cache und der Zeitstempel `last-online`.
+- Instagram wird nur verlinkt, nie eingebettet.
+- Neue Seiten bekommen `Seo.svelte`, Seiten ohne Inhalt für Suchende zusätzlich `noindex`.
 
 ## Barrierefreiheit
 

@@ -74,6 +74,7 @@ src/
     contact/                    Kontaktformular
     imprint/, privacy/          Impressum und Datenschutz, noch Platzhalter
     manifest.webmanifest/       erzeugt das Manifest aus settings.ts
+    robots.txt/, sitemap.xml/   entstehen beim Bauen aus settings.siteUrl
   service-worker/index.ts       Service Worker
 static/
   fonts/, icons/, poster/, video/
@@ -95,6 +96,7 @@ Komponenten:
 | `InfoDialog` | Info-Overlay als natives `<dialog>` |
 | `OfflineBar` | Streifen „Offline – saved version“ |
 | `SubPage` | Gerüst für die Seiten contact, imprint und privacy |
+| `Seo` | Titel, Beschreibung, Canonical und Vorschau beim Teilen |
 | `Icon` | alle Linien-Icons |
 
 ## Einstellungen
@@ -109,7 +111,7 @@ Alles in `src/lib/settings.ts`. Die andere Variante steht jeweils auskommentiert
 | `video.mode` | `'two'` (Handy eigene 4:5-Datei), `'one'` (16:9 für alle) | `'two'` |
 | `video.offline` | `true` speichert die Handy-Datei im Service Worker | `false` |
 
-Stammdaten in derselben Datei: `name`, `city`, `instagramHandle`, `email`, `videoTitle`,
+Stammdaten in derselben Datei: `siteUrl`, `description`, `name`, `city`, `instagramHandle`, `email`, `videoTitle`,
 `videoYear`. Daraus abgeleitet: `instagramUrl` und `emailLabel`.
 
 ## Wie die Teile zusammenspielen
@@ -151,6 +153,16 @@ komplett offline.
 **Offline-Status.** `navigator.onLine` reicht nicht, bei totem Mobilfunk bleibt es oft `true`.
 Deshalb merkt sich der Service Worker, ob er die Seite aus dem Cache liefern musste, und die
 Seite fragt das nach dem Laden ab.
+
+**SEO.** `Seo.svelte` setzt je Seite Titel, Beschreibung, Canonical-Link und die Angaben für die
+Vorschau beim Teilen (`static/og.jpg`, 1200 × 630, erstes Bild des Videos). Die Startseite trägt
+zusätzlich strukturierte Daten vom Typ `Person`. `robots.txt` und `sitemap.xml` entstehen beim
+Bauen aus `settings.siteUrl`. Impressum und Datenschutz stehen auf `noindex` und fehlen in der
+Sitemap. `siteUrl` ist aus der E-Mail-Domain abgeleitet und muss zur echten Adresse passen.
+
+**Seitenwechsel.** `+layout.svelte` startet bei jeder Navigation eine View Transition, die
+Bewegung steht in `base.scss`: Die alte Seite blendet aus, die neue steigt 16 px von unten ein.
+Browser ohne die API wechseln ohne Übergang, bei `prefers-reduced-motion` ebenfalls.
 
 **Kontakt.** Mit `VITE_WEB3FORMS_KEY` sendet das Formular per POST an Web3Forms (Name, E-Mail,
 Nachricht, Honeypot). Ohne Schlüssel gibt es kein E-Mail-Feld und der Knopf öffnet das
@@ -199,8 +211,11 @@ Desktop und 2,5 MB auf dem Handy, 10–20 s, H.264.
 
 - **Web3Forms-Schlüssel fehlt.** Der echte Versand ist ungeprüft; getestet wurde nur gegen eine
   nachgestellte Antwort.
-- **Datenschutzerklärung:** Das Formular schickt Daten an Web3Forms, Bilder kommen von Unsplash.
-  Beides muss dort stehen.
+- **Datenschutz, vor dem Livegang:** Die Fotos laden von `images.unsplash.com` und übertragen
+  dabei die IP-Adresse jedes Besuchers ohne Einwilligung an einen Dritten. Fotos selbst hosten.
+  Impressum und Datenschutzerklärung sind leer. In die Erklärung gehören: Hoster und Server-Logs,
+  Web3Forms, der Offline-Speicher (Cache und ein Zeitstempel in `localStorage`), der Link zu
+  Instagram.
 - **Nicht getestet:** echtes iPhone und Safari (natives Video-Vollbild, Safari-Gesten, Video aus
   dem Cache), Firefox. Touch wurde nur in der Chrome-Emulation geprüft.
 - **Nach dem Videotausch nicht erneut geprüft:** Handy-Fassung, Offline-Betrieb und Ladebudget.

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import SubPage from '#lib/components/SubPage.svelte';
 	import { emailLabel, settings } from '#lib/settings.ts';
 
@@ -44,7 +45,10 @@
 	}
 </script>
 
-<SubPage title="Contact me">
+<SubPage
+	title="Contact me"
+	description="Get in touch with {settings.name} about commissions, collaborations or questions."
+>
 	<p class="contact__lead">
 		Are you interested in working together? Do you have any questions or just want to say hi? Drop
 		me a line by filling out the contact form below and I will get back to you as soon as I can.
@@ -88,6 +92,9 @@
 				directly to the address below.
 			{:else if !accessKey}
 				Opens your mail app with the finished message.
+			{:else}
+				Your name, email and message are sent via Web3Forms. Details in the
+				<a href={resolve('/privacy')}>privacy policy</a>.
 			{/if}
 		</p>
 	</form>

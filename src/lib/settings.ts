@@ -6,6 +6,8 @@ interface Settings {
 		mode: 'two' | 'one';
 		offline: boolean;
 	};
+	siteUrl: string;
+	description: string;
 	name: string;
 	city: string;
 	instagramHandle: string;
@@ -35,6 +37,13 @@ export const settings: Settings = {
 		offline: false
 		// offline: true
 	},
+
+	// Adresse der veröffentlichten Seite, ohne Schrägstrich am Ende. Daraus entstehen Canonical-Links,
+	// Sitemap und die Vorschau beim Teilen.
+	siteUrl: 'https://cyrillkraehenbuehl.com',
+	// erscheint in Suchergebnissen und beim Teilen, am besten 120 bis 155 Zeichen
+	description:
+		'Cyrill Kraehenbuehl is a video artist and photographer. Video work, photography and contact.',
 
 	name: 'Cyrill Kraehenbuehl',
 	city: '[City]',

@@ -36,7 +36,7 @@
 			{sizes}
 			width={photo.width}
 			height={photo.height}
-			alt=""
+			alt={photo.title}
 			loading="lazy"
 			decoding="async"
 			crossorigin="anonymous"

@@ -2,19 +2,20 @@
 	import type { Snippet } from 'svelte';
 	import { resolve } from '$app/paths';
 	import LegalLinks from './LegalLinks.svelte';
+	import Seo from './Seo.svelte';
 	import { settings } from '#lib/settings.ts';
 
 	interface Props {
 		title: string;
+		description?: string;
+		noindex?: boolean;
 		children: Snippet;
 	}
 
-	let { title, children }: Props = $props();
+	let { title, description, noindex, children }: Props = $props();
 </script>
 
-<svelte:head>
-	<title>{title} – {settings.name}</title>
-</svelte:head>
+<Seo title="{title} – {settings.name}" {description} {noindex} />
 
 <header class="sub-page__header">
 	<a class="sub-page__home" href={resolve('/')}>{settings.name}</a>

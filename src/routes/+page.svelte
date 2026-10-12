@@ -3,14 +3,26 @@
 	import InfoDialog from '#lib/components/InfoDialog.svelte';
 	import InstagramBlock from '#lib/components/InstagramBlock.svelte';
 	import PhotoSection from '#lib/components/PhotoSection.svelte';
+	import Seo from '#lib/components/Seo.svelte';
 	import SiteFooter from '#lib/components/SiteFooter.svelte';
 	import SiteHeader from '#lib/components/SiteHeader.svelte';
 	import VideoWork from '#lib/components/VideoWork.svelte';
 	import { previewSrc } from '#lib/media.ts';
 	import { photos } from '#lib/photos.ts';
-	import { settings } from '#lib/settings.ts';
+	import { instagramUrl, settings } from '#lib/settings.ts';
 
 	type Whitebox = typeof import('#lib/components/Whitebox.svelte').default;
+
+	// Sagt Suchmaschinen, wer hinter der Seite steht und dass das Instagram-Profil dazugehört.
+	const structuredData = JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: settings.name,
+		url: settings.siteUrl,
+		image: `${settings.siteUrl}/og.jpg`,
+		jobTitle: 'Video artist and photographer',
+		sameAs: [instagramUrl]
+	});
 
 	let info = $state<InfoDialog>();
 	let Whitebox = $state<Whitebox>();
@@ -40,9 +52,11 @@
 	}
 </script>
 
+<Seo title="{settings.name} – Video & Photography" />
+
 <svelte:head>
-	<title>{settings.name} – Video &amp; Photography</title>
-	<meta name="description" content="Video &amp; Photography, {settings.city}" />
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -- eigene Konstanten, kein Fremdinhalt -->
+	{@html `<script type="application/ld+json">${structuredData}</${'script'}>`}
 </svelte:head>
 
 <div class="page" inert={isWhiteboxOpen}>
